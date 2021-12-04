@@ -8,6 +8,16 @@ const btn_stop = "control_stop";
 const btn_start = "control_start";
 const text_score = "timer_span_score";
 
+const score_elements_list = [
+  ["交差点", 10],
+  ["シーソー", 15],
+  ["障害物", 15],
+  ["ギャップ", 10],
+  ["十字路", 10],
+  ["バンプ", 5],
+];
+let score_memory_list = [];
+
 function To_double_digest_number(number) {
   return ("0" + number).slice(-2);
 }
@@ -27,6 +37,29 @@ window.onload = function () {
   document.getElementById(text_stopwatch).innerText = To_MinSec(timer_now_sec);
   document.getElementById(btn_stop).style.display = "none";
   document.getElementById(btn_start).style.display = "flex";
+
+  for (let index = 0; index < score_elements_list.length; index++) {
+    let tempHTML = "";
+    tempHTML += "<tr>";
+    tempHTML += "<td>";
+    tempHTML += score_elements_list[index][0];
+    tempHTML += "(";
+    tempHTML += score_elements_list[index][1];
+    tempHTML += "点)";
+    tempHTML += "</td>";
+    tempHTML += "<td>";
+    tempHTML += '<span class="count_elements">0</span>';
+    tempHTML += '<span class="add_elements" onclick="elements_add(';
+    tempHTML += index;
+    tempHTML += ')">+</span>';
+    tempHTML += '<span class="reduce_elements" onclick="elements_reduce(';
+    tempHTML += index;
+    tempHTML += ')">-</span>';
+    tempHTML += "</td>";
+    tempHTML += "</tr>";
+    document.getElementById("score_table_tbody").innerHTML += tempHTML;
+    score_memory_list.push(0);
+  }
 };
 
 function Update_timer_display() {
@@ -66,4 +99,27 @@ function timer_freeze() {
   clearInterval(timer_interval);
   document.getElementById(btn_start).style.display = "flex";
   document.getElementById(btn_stop).style.display = "none";
+}
+
+function update_score_display() {
+  temp = 0;
+  for (let index = 0; index < score_elements_list.length; index++) {
+    temp += score_elements_list[index][1] * score_memory_list[index];
+  }
+  document.getElementById("timer_span_score").innerHTML = temp.toLocaleString();
+}
+
+function elements_add(num) {
+  score_memory_list[num]++;
+  document.getElementsByClassName("count_elements")[num].innerText =
+    score_memory_list[num];
+  update_score_display();
+}
+function elements_reduce(num) {
+  if (score_memory_list[num] > 0) {
+    score_memory_list[num]--;
+    document.getElementsByClassName("count_elements")[num].innerText =
+      score_memory_list[num];
+    update_score_display();
+  }
 }

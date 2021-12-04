@@ -43,7 +43,7 @@ html body #timer_control_container .timer_control_child {
 
 html body #timer_control_container span {
   min-width: 500px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: darkgreen 2px solid;
   padding: 5px 0px;
 }
@@ -72,6 +72,40 @@ html body #score_table {
 }
 
 html body #score_table tr td {
+  padding: 5px;
   border: 1px gray solid;
+}
+
+html body #score_table tr span {
+  margin: 0px 10px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+  min-height: 50px;
+  min-width: 50px;
+  padding-top: 5px;
+}
+
+html body #score_table tr .add_elements {
+  border: 1px crimson solid;
+  background: crimson;
+}
+
+html body #score_table tr .reduce_elements {
+  border: 1px tomato solid;
+  background: tomato;
+}
+
+html body #score_table tr .reduce_elements, html body #score_table tr .add_elements {
+  color: white;
+}
+
+@media screen and (max-width: 1050px) {
+  .timer_control_child {
+    width: 100%;
+  }
+  .timer_control_child span {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=index.css.map */

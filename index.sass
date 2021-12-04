@@ -22,7 +22,7 @@ html
                 display: flex
             span
                 min-width: 500px
-                border-radius: 5px
+                border-radius: 10px
                 border: darkgreen 2px solid
                 padding: 5px 0px
             div
@@ -43,4 +43,29 @@ html
             border-collapse: collapse
             tr
                 td
+                    padding: 5px
                     border: 1px gray solid
+                span
+                    margin: 0px 10px
+                    text-align: center
+                    display: inline-block
+                    border-radius: 10px
+                    min-height: 50px
+                    min-width: 50px
+                    padding-top: 5px
+                .add_elements
+                    border: 1px crimson solid
+                    background: crimson
+                .reduce_elements
+                    border: 1px tomato solid
+                    background: tomato
+                .reduce_elements,.add_elements
+                    color: white
+                .count_elements
+                    //border: 1px gray solid
+
+@media screen and (max-width: 1050px)
+    .timer_control_child
+        width: 100%
+        span
+            width: 100%
