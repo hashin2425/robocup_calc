@@ -4,6 +4,20 @@
     <script src="index.js" type="text/javascript"></script>
     <link rel="stylesheet" href="index.css" />
     <title>ロボカップレスキュー｜スコアツール</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4RHB3Z0F33"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-4RHB3Z0F33");
+    </script>
   </head>
   <body>
     <table id="display_table">
@@ -18,7 +32,7 @@
       <tr>
         <td>得点</td>
         <td>
-          <span id="timer_span_score">1,000</span>
+          <span id="timer_span_score">0</span>
           <span>点</span>
         </td>
       </tr>
