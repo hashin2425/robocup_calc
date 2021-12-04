@@ -7,6 +7,7 @@ html {
 
 html body {
   margin: 0px;
+  font-size: 40px;
 }
 
 html body span {
@@ -41,7 +42,7 @@ html body #timer_control_container .timer_control_child {
 }
 
 html body #timer_control_container span {
-  min-width: 200px;
+  min-width: 500px;
   border-radius: 5px;
   border: darkgreen 2px solid;
   padding: 5px 0px;
