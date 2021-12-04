@@ -7,7 +7,6 @@ html {
 
 html body {
   margin: 0px;
-  font-size: 40px;
 }
 
 html body span {
@@ -81,9 +80,6 @@ html body #score_table tr span {
   text-align: center;
   display: inline-block;
   border-radius: 10px;
-  min-height: 50px;
-  min-width: 50px;
-  padding-top: 5px;
 }
 
 html body #score_table tr .add_elements {
@@ -101,11 +97,30 @@ html body #score_table tr .reduce_elements, html body #score_table tr .add_eleme
 }
 
 @media screen and (max-width: 1050px) {
+  body {
+    font-size: 70px;
+  }
+  #score_table span {
+    min-height: 70px;
+    min-width: 100px;
+    padding-top: 12px;
+  }
   .timer_control_child {
     width: 100%;
   }
   .timer_control_child span {
     width: 100%;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  body {
+    font-size: 40px;
+  }
+  #score_table span {
+    min-height: 50px;
+    min-width: 50px;
+    padding-top: 5px;
   }
 }
 /*# sourceMappingURL=index.css.map */

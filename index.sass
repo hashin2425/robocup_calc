@@ -2,7 +2,6 @@ html
     user-select: none
     body
         margin: 0px
-        font-size: 40px
         span
             min-width: 200px
         table
@@ -50,9 +49,6 @@ html
                     text-align: center
                     display: inline-block
                     border-radius: 10px
-                    min-height: 50px
-                    min-width: 50px
-                    padding-top: 5px
                 .add_elements
                     border: 1px crimson solid
                     background: crimson
@@ -65,7 +61,25 @@ html
                     //border: 1px gray solid
 
 @media screen and (max-width: 1050px)
+    //スマホ
+    body
+        font-size: 70px
+    #score_table
+        span
+            min-height: 70px
+            min-width: 100px
+            padding-top: 12px
     .timer_control_child
         width: 100%
         span
             width: 100%
+
+@media screen and (min-width: 1050px)
+    //パソコン
+    body
+        font-size: 40px
+    #score_table
+        span
+            min-height: 50px
+            min-width: 50px
+            padding-top: 5px
