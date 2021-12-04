@@ -1,0 +1,76 @@
+html {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+html body {
+  margin: 0px;
+}
+
+html body span {
+  min-width: 200px;
+}
+
+html body table {
+  width: 100%;
+}
+
+html body #display_table {
+  background: orangered;
+  color: white;
+}
+
+html body #timer_control_container {
+  text-align: center;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+html body #timer_control_container .timer_control_child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html body #timer_control_container span {
+  min-width: 200px;
+  border-radius: 5px;
+  border: darkgreen 2px solid;
+  padding: 5px 0px;
+}
+
+html body #timer_control_container div {
+  padding: 10px;
+}
+
+html body #timer_control_container #control_reset span {
+  background: white;
+  color: darkgreen;
+}
+
+html body #timer_control_container #control_start span {
+  background: darkgreen;
+  color: white;
+}
+
+html body #timer_control_container #control_stop span {
+  background: darkgreen;
+  color: white;
+}
+
+html body #score_table {
+  border-collapse: collapse;
+}
+
+html body #score_table tr td {
+  border: 1px gray solid;
+}
+/*# sourceMappingURL=index.css.map */

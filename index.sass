@@ -1,0 +1,45 @@
+html
+    user-select: none
+    body
+        margin: 0px
+        span
+            min-width: 200px
+        table
+            width: 100%
+        td
+            //border: 1px black solid
+        #display_table
+            background: orangered
+            color: white
+        #timer_control_container
+            text-align: center
+            width: 100%
+            display: flex
+            justify-content: space-around
+            flex-wrap: wrap
+            .timer_control_child
+                display: flex
+            span
+                min-width: 200px
+                border-radius: 5px
+                border: darkgreen 2px solid
+                padding: 5px 0px
+            div
+                padding: 10px
+            #control_reset
+                span
+                    background: white
+                    color: darkgreen
+            #control_start
+                span
+                    background: darkgreen
+                    color: white
+            #control_stop
+                span
+                    background: darkgreen
+                    color: white
+        #score_table
+            border-collapse: collapse
+            tr
+                td
+                    border: 1px gray solid
