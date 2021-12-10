@@ -1,2 +1,7 @@
 # robocup_calc.github.io
-The calculator for the score of robo-cup rescue
+ロボカップ レスキューラインの得点を計算し、競技時間を計測するためのWebツールです。
+
+
+こちらのURLから利用できます。
+> https://hashin2425.github.io/robocup_calc/
+
