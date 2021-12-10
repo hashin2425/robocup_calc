@@ -43,12 +43,12 @@ window.onload = function () {
     tempHTML += "<tr>";
     tempHTML += "<td>";
     tempHTML += score_elements_list[index][0];
-    tempHTML += "(";
+    tempHTML += '<span class="score-points">(';
     tempHTML += score_elements_list[index][1];
-    tempHTML += "点)";
+    tempHTML += "点)</span>";
     tempHTML += "</td>";
     tempHTML += "<td>";
-    tempHTML += '<span class="count_elements">0</span>';
+    tempHTML += '<span class="count_elements fade-orange">0</span>';
     tempHTML += '<span class="add_elements" onclick="elements_add(';
     tempHTML += index;
     tempHTML += ')">+</span>';
@@ -101,18 +101,26 @@ function timer_freeze() {
   document.getElementById(btn_stop).style.display = "none";
 }
 
+function re_append(element) {
+  const temp = element.parentNode.innerHTML;
+  element.parentNode.innerHTML = '<div id="re_append_temp"></div>';
+  document.getElementById("re_append_temp").parentNode.innerHTML = temp;
+}
+
 function update_score_display() {
   temp = 0;
   for (let index = 0; index < score_elements_list.length; index++) {
     temp += score_elements_list[index][1] * score_memory_list[index];
   }
   document.getElementById("timer_span_score").innerHTML = temp.toLocaleString();
+  re_append(document.getElementById("timer_span_score"));
 }
 
 function elements_add(num) {
   score_memory_list[num]++;
   document.getElementsByClassName("count_elements")[num].innerText =
     score_memory_list[num];
+  re_append(document.getElementsByClassName("count_elements")[num]);
   update_score_display();
 }
 function elements_reduce(num) {
@@ -120,6 +128,7 @@ function elements_reduce(num) {
     score_memory_list[num]--;
     document.getElementsByClassName("count_elements")[num].innerText =
       score_memory_list[num];
+    re_append(document.getElementsByClassName("count_elements")[num]);
     update_score_display();
   }
 }

@@ -82,6 +82,10 @@ html body #score_table tr span {
   border-radius: 10px;
 }
 
+html body #score_table tr .score-points {
+  font-size: 40px;
+}
+
 html body #score_table tr .add_elements {
   border: 1px crimson solid;
   background: crimson;
@@ -94,6 +98,23 @@ html body #score_table tr .reduce_elements {
 
 html body #score_table tr .reduce_elements, html body #score_table tr .add_elements {
   color: white;
+}
+
+html body #footer {
+  text-align: center;
+  background-color: lightgray;
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+.fade-orange {
+  -webkit-animation: fadeout-orange 1.5s ease 0s 1 forwards;
+          animation: fadeout-orange 1.5s ease 0s 1 forwards;
+}
+
+.fade-white {
+  -webkit-animation: fadeout-white 1.5s ease 0s 1 forwards;
+          animation: fadeout-white 1.5s ease 0s 1 forwards;
 }
 
 @media screen and (max-width: 1050px) {
@@ -121,6 +142,42 @@ html body #score_table tr .reduce_elements, html body #score_table tr .add_eleme
     min-height: 50px;
     min-width: 50px;
     padding-top: 5px;
+  }
+}
+
+@-webkit-keyframes fadeout-orange {
+  0% {
+    background-color: rgba(255, 69, 0, 0.3);
+  }
+  100% {
+    background-color: rgba(255, 69, 0, 0);
+  }
+}
+
+@keyframes fadeout-orange {
+  0% {
+    background-color: rgba(255, 69, 0, 0.3);
+  }
+  100% {
+    background-color: rgba(255, 69, 0, 0);
+  }
+}
+
+@-webkit-keyframes fadeout-white {
+  0% {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes fadeout-white {
+  0% {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 /*# sourceMappingURL=index.css.map */

@@ -49,6 +49,8 @@ html
                     text-align: center
                     display: inline-block
                     border-radius: 10px
+                .score-points
+                    font-size: 40px
                 .add_elements
                     border: 1px crimson solid
                     background: crimson
@@ -59,6 +61,17 @@ html
                     color: white
                 .count_elements
                     //border: 1px gray solid
+        #footer
+            text-align: center
+            background-color: lightgray
+            font-size: 40px
+            margin-top: 20px
+
+.fade-orange
+    animation: fadeout-orange 1.5s ease 0s 1 forwards
+
+.fade-white
+    animation: fadeout-white 1.5s ease 0s 1 forwards
 
 @media screen and (max-width: 1050px)
     //スマホ
@@ -83,3 +96,17 @@ html
             min-height: 50px
             min-width: 50px
             padding-top: 5px
+
+@keyframes fadeout-orange
+    0%
+        background-color: rgba(255,69,0,0.3)
+
+    100%
+        background-color: rgba(255,69,0,0.0)
+
+@keyframes fadeout-white
+    0%
+        background-color: rgba(255,255,255,0.5)
+
+    100%
+        background-color: rgba(255,255,255,0.0)
