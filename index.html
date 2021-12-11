@@ -5,10 +5,7 @@
     <link rel="stylesheet" href="index.css" />
     <title>ロボカップレスキュー｜スコアツール</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-4RHB3Z0F33"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RHB3Z0F33"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -41,22 +38,25 @@
       </table>
     </div>
     <div id="main">
-      <p>タイマー＆ストップウォッチ</p>
-      <div id="timer_control_container">
-        <div class="timer_control_child" id="control_stop">
-          <span onclick="timer_freeze()">一時停止</span>
-        </div>
-        <div class="timer_control_child" id="control_start">
-          <span onclick="timer_begin()">計測開始</span>
-        </div>
-        <div class="timer_control_child" id="control_reset">
-          <span onclick="timer_reset()">リセット</span>
+      <div class="main_container">
+        <p>タイマー＆ストップウォッチ</p>
+        <div id="timer_control_container">
+          <div class="timer_control_child" id="control_stop">
+            <span onclick="timer_freeze()">一時停止</span>
+          </div>
+          <div class="timer_control_child" id="control_start">
+            <span onclick="timer_begin()">計測開始</span>
+          </div>
+          <div class="timer_control_child" id="control_reset">
+            <span onclick="timer_reset()">リセット</span>
+          </div>
         </div>
       </div>
-      <p>得点要素</p>
-      <table id="score_table">
-        <tbody id="score_table_tbody">
-          <!--
+      <div class="main_container">
+        <p>得点要素</p>
+        <table id="score_table">
+          <tbody id="score_table_tbody">
+            <!--
           <tr>
             <td>要素</td>
             <td>
@@ -65,11 +65,55 @@
               <span class="reduce_elements">-</span>
             </td>
           </tr>
-        --></tbody>
-      </table>
-      <p>タイル走行</p>
-      <table id="score_tiles"></table>
-      <p>被災者救助</p>
+        -->
+          </tbody>
+        </table>
+      </div>
+      <div class="main_container">
+        <p>タイル走行</p>
+        <table id="score_tiles"></table>
+      </div>
+      <div class="main_container">
+        <p>被災者救助</p>
+        <table>
+          <tbody>
+            <tr>
+              <td><span>避難ゾーン</span></td>
+              <td>
+                <select id="select_rescue_level" onchange="added_rescue()">
+                  <option value="1">レベル1</option>
+                  <option value="2">レベル2</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><span>レスキューキット</span></td>
+              <td>
+                <select id="rescue_kit" onchange="added_rescue()">
+                  <option value="0">未クリア</option>
+                  <option value="1">Lv1クリア</option>
+                  <option value="2">Lv2クリア</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table id="rescue_score_table">
+          <tbody>
+            <tr class="rescue_latest_tr">
+              <td>1番目</td>
+              <td>
+                <select id="selector_rescue" class="selector_rescue" onchange="added_rescue()">
+                  <option value="none">なし</option>
+                  <option value="alive">生きている被災者</option>
+                  <option value="dead">死んでいる被災者</option>
+                </select>
+              </td>
+              <td class="rescue_rate_td">x0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div id="footer">
       ©Hayaaaaaa｜

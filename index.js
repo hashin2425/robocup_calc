@@ -22,6 +22,14 @@ const score_elements_list = [
   ["バンプ", 5],
 ];
 
+const rescue_score_rate = [
+  //[生きている被災者, 死んでいる被災者]
+  [1.2, 1.2], //レスキューレベル1
+  [1.4, 1.4], //レスキューレベル2
+  //[避難Lv1 + キットLv1, 避難Lv1 + キットLv2, 避難Lv2 + キットLv1, 避難Lv2 + キットLv2]
+  [1.1, 1.3, 1.2, 1.6], //レスキューキット
+];
+
 const tile_score_list = [
   5, //走行1回目における各タイルの得点
   3, //走行2回目における各タイルの得点
@@ -36,6 +44,8 @@ let tile_score_memory_list = [
 let score_memory_list = [
   /*[要素をクリアした個数, 要素をクリアした個数, 要素をクリアした個数...]*/
 ];
+
+let rescue_gained_multiple = [];
 
 function To_double_digest_number(number) {
   //一桁の数字に対して頭に0をつける（例：3 => 03）
@@ -66,59 +76,68 @@ window.onload = function () {
 
   //「得点要素」の要素テーブルを生成する
   for (let index = 0; index < score_elements_list.length; index++) {
-    let tempHTML = "";
-    tempHTML += "<tr>";
-    tempHTML += "<td>";
-    tempHTML += score_elements_list[index][0];
-    tempHTML += '<span class="score-points">(';
-    tempHTML += score_elements_list[index][1];
-    tempHTML += "点)</span>";
-    tempHTML += "</td>";
-    tempHTML += "<td>";
-    tempHTML += '<span class="count_elements fade-orange">0</span>';
-    tempHTML += '<span class="add_elements" onclick="elements_add(';
-    tempHTML += index;
-    tempHTML += ')">+</span>';
-    tempHTML += '<span class="reduce_elements" onclick="elements_reduce(';
-    tempHTML += index;
-    tempHTML += ')">-</span>';
-    tempHTML += "</td>";
-    tempHTML += "</tr>";
+    let tempHTML =
+      "<tr>" +
+      "<td>" +
+      score_elements_list[index][0] +
+      '<span class="score-points">(' +
+      score_elements_list[index][1] +
+      "点)</span>" +
+      "</td>" +
+      "<td>" +
+      '<span class="count_elements fade-orange">0</span>' +
+      '<span class="add_elements" onclick="elements_add(' +
+      index +
+      ')">+</span>' +
+      '<span class="reduce_elements" onclick="elements_reduce(' +
+      index +
+      ')">-</span>' +
+      "</td>" +
+      "</tr>";
     document.getElementById("score_table_tbody").innerHTML += tempHTML;
     score_memory_list.push(0);
   }
 
   //「タイル走行」の入力テーブルを生成する
-  let tempHTML = "";
-  tempHTML += "<tbody>";
-  tempHTML +=
+  var tempHTML =
+    "<tbody>" +
     '<tr><td class="tile_table_title_td clear" colspan=5 onclick="checkpoint_done(0);">スタート(5点)</td></tr>';
   for (let index = 0; index <= how_many_CheckPointMarker; index++) {
-    tempHTML += '<tr class="title_scoreboard no_clear ' + index + '">';
-    tempHTML += "<td colspan=3 style=font-size:60px>進行の停止：";
-    tempHTML += '<span class="tile_count_elements fade-orange">0</span>回</td>';
-    tempHTML += "<td colspan=2>";
-    tempHTML += '<span class="add_elements" onclick="tile_add(';
-    tempHTML += index;
-    tempHTML += ')">+</span>';
-    tempHTML += '<span class="reduce_elements" onclick="tile_reduce(';
-    tempHTML += index;
-    tempHTML += ')">-</span>';
-    tempHTML += "</td>";
-    tempHTML += "</tr>";
-
-    tempHTML += '<tr class="title_scoreboard no_clear ' + index + '">';
-    tempHTML += "<td class=tile_each_point>" + tile_score_list[0] + "点</td>";
-    tempHTML += "<td>☓</td>";
-    tempHTML += "<td><input class=input_tile_count type=number value=10>枚</input></td>";
-    tempHTML += "<td>＝</td>";
-    tempHTML += "<td class=tile_score_sum>小計</td>";
-    tempHTML += "</tr>";
+    tempHTML +=
+      '<tr class="title_scoreboard no_clear ' +
+      index +
+      '">' +
+      "<td colspan=3>進行の停止：" +
+      '<span class="tile_count_elements fade-orange">0</span>回</td>' +
+      "<td colspan=2>" +
+      '<span class="add_elements" onclick="tile_add(' +
+      index +
+      ')">+</span>' +
+      '<span class="reduce_elements" onclick="tile_reduce(' +
+      index +
+      ')">-</span>' +
+      "</td>" +
+      "</tr>";
 
     tempHTML +=
-      '<tr><td class="tile_table_title_td checkpoint no_clear" colspan=5 onclick="checkpoint_done(' + index + ');">';
-    tempHTML += "チェックポイント(未通過)";
-    tempHTML += "</td></tr>";
+      '<tr class="title_scoreboard no_clear ' +
+      index +
+      '">' +
+      "<td class=tile_each_point>" +
+      tile_score_list[0] +
+      "点</td>" +
+      "<td>☓</td>" +
+      "<td><input class=input_tile_count type=number value=10>枚</input></td>" +
+      "<td>＝</td>" +
+      "<td class=tile_score_sum>小計</td>" +
+      "</tr>";
+
+    tempHTML +=
+      '<tr><td class="tile_table_title_td checkpoint no_clear" colspan=5 onclick="checkpoint_done(' +
+      index +
+      ');">' +
+      "チェックポイント(未通過)" +
+      "</td></tr>";
     tile_score_memory_list.push([0, 0, 0]);
   }
   tempHTML +=
@@ -191,8 +210,19 @@ function update_score_display() {
   }
   //ゴールしたことによる得点
   temp += is_reached_goal * score_by_goal;
+  //レスキューによって獲得した乗数を適応する
+  const evacuate_zone = document.getElementById("select_rescue_level").value;
+  const rescue_kit = document.getElementById("rescue_kit").value;
+  const temp_rescue_kit = evacuate_zone + "_" + rescue_kit;
+  if (temp_rescue_kit == "1_1") temp *= rescue_score_rate[2][0];
+  if (temp_rescue_kit == "1_2") temp *= rescue_score_rate[2][1];
+  if (temp_rescue_kit == "2_1") temp *= rescue_score_rate[2][2];
+  if (temp_rescue_kit == "2_2") temp *= rescue_score_rate[2][3];
+  for (let index = 0; index < rescue_gained_multiple.length; index++) {
+    temp *= rescue_gained_multiple[index];
+  }
   //点数を表示
-  document.getElementById("timer_span_score").innerHTML = temp.toLocaleString();
+  document.getElementById("timer_span_score").innerHTML = parseInt(temp).toLocaleString();
   re_append(document.getElementById("timer_span_score"));
 }
 
@@ -223,6 +253,7 @@ function tile_score_calc(num) {
   if (tile_score_memory_list[num][0] >= 3) each_tile_score = tile_score_list[3];
   tile_score_memory_list[num][1] = tile_count * each_tile_score;
   document.getElementsByClassName("tile_score_sum")[num].innerText = tile_score_memory_list[num][1] + "点";
+  document.getElementsByClassName("tile_each_point")[num].innerText = each_tile_score + "点";
   update_score_display();
 }
 
@@ -258,5 +289,49 @@ function checkpoint_done(num) {
   title_element.classList.remove("no_clear");
   title_element.classList.add("clear");
   tile_score_calc(num);
+  update_score_display();
+}
+
+function added_rescue() {
+  const selectList = document.getElementsByClassName("selector_rescue");
+  if (selectList[selectList.length - 1].value != "none") {
+    let new_tr = document.createElement("tr");
+    new_tr.classList.add("rescue_latest_tr");
+    new_tr.innerHTML =
+      '<tr class="rescue_latest_tr">' +
+      "  <td>" +
+      (selectList.length + 1) +
+      "番目</td>" +
+      "  <td>" +
+      '    <select id="selector_rescue" class="selector_rescue" onchange="added_rescue()">' +
+      '      <option value="none">なし</option>' +
+      '      <option value="alive">生きている被災者</option>' +
+      '      <option value="dead">死んでいる被災者</option>' +
+      "    </select>" +
+      "  </td>" +
+      "  <td class=rescue_rate_td>x0</td>" +
+      "</tr>";
+    document.getElementsByClassName("rescue_latest_tr")[0].after(new_tr);
+    document.getElementsByClassName("rescue_latest_tr")[0].classList.remove("rescue_latest_tr");
+  }
+  let rescue_results = [];
+  for (let index = 0; index < selectList.length; index++) {
+    rescue_results.push(selectList[index].value);
+  }
+  const rescue_level = parseInt(document.getElementById("select_rescue_level").value) - 1;
+  let is_livings_done = 0;
+  rescue_gained_multiple = [];
+  for (let index = rescue_results.length - 1; index >= 0; index--) {
+    if (rescue_results[index] == "alive") {
+      document.getElementsByClassName("rescue_rate_td")[index].innerText = "x" + rescue_score_rate[rescue_level][0];
+      rescue_gained_multiple.push(rescue_score_rate[rescue_level][0]);
+      is_livings_done = 1;
+    }
+    if (rescue_results[index] == "dead") {
+      document.getElementsByClassName("rescue_rate_td")[index].innerText =
+        "x" + rescue_score_rate[rescue_level][is_livings_done];
+      rescue_gained_multiple.push(rescue_score_rate[rescue_level][is_livings_done]);
+    }
+  }
   update_score_display();
 }

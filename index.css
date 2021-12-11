@@ -36,6 +36,31 @@ html body #header #display_table #timer_span_score {
 
 html body #main {
   margin: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+html body #main .main_containter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+html body #main #rescue_score_table {
+  border-collapse: collapse;
+}
+
+html body #main #rescue_score_table tr {
+  border: 1px gray solid;
+}
+
+html body #main select {
+  font-size: 0.8rem;
 }
 
 html body #main #score_tiles {
@@ -72,7 +97,8 @@ html body #main #score_tiles tr td {
 
 html body #main #score_tiles tr td input {
   width: 130px;
-  font-size: 65px;
+  font-size: 0.9rem;
+  text-align: right;
 }
 
 html body span {
@@ -136,21 +162,14 @@ html body #score_table tr td {
   border: 1px gray solid;
 }
 
-html body #score_table tr span {
-  margin: 0px 10px;
-  text-align: center;
-  display: inline-block;
-  border-radius: 10px;
-}
-
 html body #score_table tr .score-points {
-  font-size: 40px;
+  font-size: 0.5rem;
 }
 
 html body #footer {
   text-align: center;
   background-color: lightgray;
-  font-size: 30px;
+  font-size: 0.35rem;
   margin-top: 20px;
 }
 
@@ -173,6 +192,10 @@ html body #footer {
   min-height: 70px;
   min-width: 100px;
   padding-top: 12px;
+  margin: 0px 10px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
 }
 
 .fade-orange {
@@ -186,10 +209,13 @@ html body #footer {
 }
 
 @media screen and (max-width: 1050px) {
-  body {
+  html {
     font-size: 70px;
   }
-  #score_table span {
+  .main_container {
+    width: 100%;
+  }
+  .reduce_elements, .add_elements {
     min-height: 70px;
     min-width: 100px;
     padding-top: 12px;
@@ -203,10 +229,14 @@ html body #footer {
 }
 
 @media screen and (min-width: 1050px) {
-  body {
+  html {
     font-size: 40px;
   }
-  #score_table span {
+  .main_container {
+    width: 45%;
+    min-width: 590px;
+  }
+  .reduce_elements, .add_elements {
     min-height: 50px;
     min-width: 50px;
     padding-top: 5px;

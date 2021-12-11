@@ -21,6 +21,17 @@ html
                     display: inline-block
         #main
             margin: 20px
+            display: flex
+            justify-content: space-around
+            flex-wrap: wrap
+            .main_containter
+                display: flex
+            #rescue_score_table
+                border-collapse: collapse
+                tr
+                    border: 1px gray solid
+            select
+                font-size: 0.8rem
             #score_tiles
                 border-collapse: collapse
                 tr
@@ -40,7 +51,8 @@ html
                         text-align: center
                         input
                             width: 130px
-                            font-size: 65px
+                            font-size: 0.9rem
+                            text-align: right
         span
             min-width: 200px
         table
@@ -80,19 +92,14 @@ html
                 td
                     padding: 5px
                     border: 1px gray solid
-                span
-                    margin: 0px 10px
-                    text-align: center
-                    display: inline-block
-                    border-radius: 10px
                 .score-points
-                    font-size: 40px
+                    font-size: 0.5rem
                 .count_elements
                     //border: 1px gray solid
         #footer
             text-align: center
             background-color: lightgray
-            font-size: 30px
+            font-size: 0.35rem
             margin-top: 20px
 
 .add_elements
@@ -110,6 +117,10 @@ html
     min-height: 70px
     min-width: 100px
     padding-top: 12px
+    margin: 0px 10px
+    text-align: center
+    display: inline-block
+    border-radius: 10px
 
 .fade-orange
     animation: fadeout-orange 1.5s ease 0s 1 forwards
@@ -119,13 +130,14 @@ html
 
 @media screen and (max-width: 1050px)
     //スマホ
-    body
+    html
         font-size: 70px
-    #score_table
-        span
-            min-height: 70px
-            min-width: 100px
-            padding-top: 12px
+    .main_container
+        width: 100%
+    .reduce_elements,.add_elements
+        min-height: 70px
+        min-width: 100px
+        padding-top: 12px
     .timer_control_child
         width: 100%
         span
@@ -133,13 +145,15 @@ html
 
 @media screen and (min-width: 1050px)
     //パソコン
-    body
+    html
         font-size: 40px
-    #score_table
-        span
-            min-height: 50px
-            min-width: 50px
-            padding-top: 5px
+    .main_container
+        width: 45%
+        min-width: 590px
+    .reduce_elements,.add_elements
+        min-height: 50px
+        min-width: 50px
+        padding-top: 5px
 
 @keyframes fadeout-orange
     0%
