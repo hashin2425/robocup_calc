@@ -2,15 +2,51 @@ html
     user-select: none
     body
         margin: 0px
+        padding: 0px
+        #header
+            height: 325px
+            #display_table
+                margin: 0px
+                position: fixed
+                width: 100%
+                top: 0px
+                left: 0px
+                background: mediumblue
+                color: white
+                .timer_table_data
+                    text-align: right
+                    padding-right: 50px
+                #timer_span_score
+                    min-width: 110px
+                    display: inline-block
+        #main
+            margin: 20px
+            #score_tiles
+                border-collapse: collapse
+                tr
+                    border: 1px gray solid
+                    .tile_table_title_td
+                        color: white
+                        &.no_clear
+                            background-color: red
+                        &.clear
+                            background-color: green
+                    &.title_scoreboard
+                        &.no_clear
+                            background-color: pink
+                        &.clear
+                            background-color: lightgreen
+                    td
+                        text-align: center
+                        input
+                            width: 130px
+                            font-size: 65px
         span
             min-width: 200px
         table
             width: 100%
         td
             //border: 1px black solid
-        #display_table
-            background: orangered
-            color: white
         #timer_control_container
             text-align: center
             width: 100%
@@ -51,21 +87,29 @@ html
                     border-radius: 10px
                 .score-points
                     font-size: 40px
-                .add_elements
-                    border: 1px crimson solid
-                    background: crimson
-                .reduce_elements
-                    border: 1px tomato solid
-                    background: tomato
-                .reduce_elements,.add_elements
-                    color: white
                 .count_elements
                     //border: 1px gray solid
         #footer
             text-align: center
             background-color: lightgray
-            font-size: 40px
+            font-size: 30px
             margin-top: 20px
+
+.add_elements
+    border: 1px crimson solid
+    background: crimson
+.reduce_elements
+    border: 1px tomato solid
+    background: tomato
+.reduce_elements,.add_elements
+    color: white
+    margin: 0px 10px
+    text-align: center
+    display: inline-block
+    border-radius: 10px
+    min-height: 70px
+    min-width: 100px
+    padding-top: 12px
 
 .fade-orange
     animation: fadeout-orange 1.5s ease 0s 1 forwards

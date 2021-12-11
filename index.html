@@ -19,40 +19,44 @@
       gtag("config", "G-4RHB3Z0F33");
     </script>
   </head>
+
   <body>
-    <table id="display_table">
-      <tr>
-        <td>残り時間</td>
-        <td id="timer_table_timer">08:00</td>
-      </tr>
-      <tr>
-        <td>経過時間</td>
-        <td id="timer_table_stopwatch">00:00</td>
-      </tr>
-      <tr>
-        <td>得点</td>
-        <td>
-          <span id="timer_span_score" class="fade-white">0</span>
-          <span>点</span>
-        </td>
-      </tr>
-    </table>
-    <p>タイマー＆ストップウォッチ</p>
-    <div id="timer_control_container">
-      <div class="timer_control_child" id="control_stop">
-        <span onclick="timer_freeze()">一時停止</span>
-      </div>
-      <div class="timer_control_child" id="control_start">
-        <span onclick="timer_begin()">計測開始</span>
-      </div>
-      <div class="timer_control_child" id="control_reset">
-        <span onclick="timer_reset()">リセット</span>
-      </div>
+    <div id="header">
+      <table id="display_table">
+        <tr>
+          <td>残り時間</td>
+          <td id="timer_table_timer" class="timer_table_data">08:00</td>
+        </tr>
+        <tr>
+          <td>経過時間</td>
+          <td id="timer_table_stopwatch" class="timer_table_data">00:00</td>
+        </tr>
+        <tr>
+          <td>得点</td>
+          <td class="timer_table_data">
+            <span id="timer_span_score" class="fade-white">0</span>
+            <span>点</span>
+          </td>
+        </tr>
+      </table>
     </div>
-    <p>スコア入力</p>
-    <table id="score_table">
-      <tbody id="score_table_tbody">
-        <!--
+    <div id="main">
+      <p>タイマー＆ストップウォッチ</p>
+      <div id="timer_control_container">
+        <div class="timer_control_child" id="control_stop">
+          <span onclick="timer_freeze()">一時停止</span>
+        </div>
+        <div class="timer_control_child" id="control_start">
+          <span onclick="timer_begin()">計測開始</span>
+        </div>
+        <div class="timer_control_child" id="control_reset">
+          <span onclick="timer_reset()">リセット</span>
+        </div>
+      </div>
+      <p>得点要素</p>
+      <table id="score_table">
+        <tbody id="score_table_tbody">
+          <!--
           <tr>
             <td>要素</td>
             <td>
@@ -61,9 +65,12 @@
               <span class="reduce_elements">-</span>
             </td>
           </tr>
-        -->
-      </tbody>
-    </table>
+        --></tbody>
+      </table>
+      <p>タイル走行</p>
+      <table id="score_tiles"></table>
+      <p>被災者救助</p>
+    </div>
     <div id="footer">
       ©Hayaaaaaa｜
       <a href="https://github.com/hashin2425/robocup_calc">Github-Repository</a>

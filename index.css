@@ -7,6 +7,72 @@ html {
 
 html body {
   margin: 0px;
+  padding: 0px;
+}
+
+html body #header {
+  height: 325px;
+}
+
+html body #header #display_table {
+  margin: 0px;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  background: mediumblue;
+  color: white;
+}
+
+html body #header #display_table .timer_table_data {
+  text-align: right;
+  padding-right: 50px;
+}
+
+html body #header #display_table #timer_span_score {
+  min-width: 110px;
+  display: inline-block;
+}
+
+html body #main {
+  margin: 20px;
+}
+
+html body #main #score_tiles {
+  border-collapse: collapse;
+}
+
+html body #main #score_tiles tr {
+  border: 1px gray solid;
+}
+
+html body #main #score_tiles tr .tile_table_title_td {
+  color: white;
+}
+
+html body #main #score_tiles tr .tile_table_title_td.no_clear {
+  background-color: red;
+}
+
+html body #main #score_tiles tr .tile_table_title_td.clear {
+  background-color: green;
+}
+
+html body #main #score_tiles tr.title_scoreboard.no_clear {
+  background-color: pink;
+}
+
+html body #main #score_tiles tr.title_scoreboard.clear {
+  background-color: lightgreen;
+}
+
+html body #main #score_tiles tr td {
+  text-align: center;
+}
+
+html body #main #score_tiles tr td input {
+  width: 130px;
+  font-size: 65px;
 }
 
 html body span {
@@ -15,11 +81,6 @@ html body span {
 
 html body table {
   width: 100%;
-}
-
-html body #display_table {
-  background: orangered;
-  color: white;
 }
 
 html body #timer_control_container {
@@ -86,25 +147,32 @@ html body #score_table tr .score-points {
   font-size: 40px;
 }
 
-html body #score_table tr .add_elements {
+html body #footer {
+  text-align: center;
+  background-color: lightgray;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.add_elements {
   border: 1px crimson solid;
   background: crimson;
 }
 
-html body #score_table tr .reduce_elements {
+.reduce_elements {
   border: 1px tomato solid;
   background: tomato;
 }
 
-html body #score_table tr .reduce_elements, html body #score_table tr .add_elements {
+.reduce_elements, .add_elements {
   color: white;
-}
-
-html body #footer {
+  margin: 0px 10px;
   text-align: center;
-  background-color: lightgray;
-  font-size: 40px;
-  margin-top: 20px;
+  display: inline-block;
+  border-radius: 10px;
+  min-height: 70px;
+  min-width: 100px;
+  padding-top: 12px;
 }
 
 .fade-orange {
