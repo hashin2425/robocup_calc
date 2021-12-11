@@ -9,7 +9,6 @@ const btn_stop = "control_stop";
 const btn_start = "control_start";
 const text_score = "timer_span_score";
 const score_by_beginning = 5; //スタートタイルから出発したときにもらえる得点
-const score_by_goal = 5; //ゴールしたときにもらえる得点
 let is_reached_goal = 0; //ゴールの赤ラインまで到達できたかどうか
 
 const score_elements_list = [
@@ -84,7 +83,7 @@ window.onload = function () {
       score_elements_list[index][1] +
       "点)</span>" +
       "</td>" +
-      "<td>" +
+      '<td style="text-align: center">' +
       '<span class="count_elements fade-orange">0</span>' +
       '<span class="add_elements" onclick="elements_add(' +
       index +
@@ -143,11 +142,11 @@ window.onload = function () {
   tempHTML +=
     '<tr><td class="tile_table_title_td goal no_clear" colspan=5 onclick="checkpoint_done(' +
     (how_many_CheckPointMarker + 1) +
-    ');">ゴール(' +
-    score_by_goal +
-    "点)</td></tr>";
+    ');">ゴール(60点)</td></tr>';
   tempHTML += "</tbody>";
   document.getElementById("score_tiles").innerHTML += tempHTML;
+
+  document.getElementById("loading_screen").style.display = "none";
 };
 
 //タイマー関連のファンクション
@@ -208,8 +207,12 @@ function update_score_display() {
   for (let index = 0; index < tile_score_memory_list.length; index++) {
     temp += tile_score_memory_list[index][1] * tile_score_memory_list[index][2];
   }
-  //ゴールしたことによる得点
-  temp += is_reached_goal * score_by_goal;
+  //ゴールしたことによる得点( = (60点 - 進行停止回数 * 5点))
+  let stop_count = 0;
+  for (let i = 0; i < tile_score_memory_list.length; i++) stop_count += tile_score_memory_list[i][0];
+  temp += is_reached_goal * Math.max(0, 60 - 5 * stop_count);
+  document.getElementsByClassName("tile_table_title_td goal")[0].innerText =
+    "ゴール(" + Math.max(0, 60 - 5 * stop_count) + "点)";
   //レスキューによって獲得した乗数を適応する
   const evacuate_zone = document.getElementById("select_rescue_level").value;
   const rescue_kit = document.getElementById("rescue_kit").value;
@@ -245,6 +248,7 @@ function elements_reduce(num) {
 }
 
 function tile_score_calc(num) {
+  update_score_display();
   const tile_count = document.getElementsByClassName("input_tile_count")[num].value;
   let each_tile_score = tile_score_list[0];
   if (tile_score_memory_list[num][0] == 0) each_tile_score = tile_score_list[0];
@@ -254,6 +258,7 @@ function tile_score_calc(num) {
   tile_score_memory_list[num][1] = tile_count * each_tile_score;
   document.getElementsByClassName("tile_score_sum")[num].innerText = tile_score_memory_list[num][1] + "点";
   document.getElementsByClassName("tile_each_point")[num].innerText = each_tile_score + "点";
+
   update_score_display();
 }
 
